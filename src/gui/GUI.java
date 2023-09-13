@@ -1,13 +1,14 @@
 package gui;
 
 import javax.swing.*;
+import reproduccion.Reproductor;
 import java.awt.*;
 
 public class GUI extends JFrame {
 	private JTextArea textArea;
 	private JButton button1; private JButton button2; private JButton button3; private JButton button4; private JButton button5; private JButton button6;
 	
-	public GUI() {
+	public GUI(Reproductor rep1, Reproductor rep2, Reproductor rep3, Reproductor rep4, Reproductor rep5, Reproductor rep6) {
 		setTitle("Sonidos DJ");
         setSize(500, 600); // Set the desired size
         setResizable(false); // Disable frame resizing
@@ -48,22 +49,18 @@ public class GUI extends JFrame {
         
         // Set null layout
         getContentPane().setLayout(null);
+        
+        button1.addActionListener(e -> reproducir(rep1));
+        button2.addActionListener(e -> reproducir(rep2));
+        button3.addActionListener(e -> reproducir(rep3));
+        button4.addActionListener(e -> reproducir(rep4));
+        button5.addActionListener(e -> reproducir(rep5));
+        button6.addActionListener(e -> reproducir(rep6));
     }
+
 	
-	public void crearVentana() {
-		SwingUtilities.invokeLater(() -> {
-			GUI frame = new GUI();
-	        frame.setVisible(true);
-	    });
-	}
-	
-	public void decirAccion(String hora, String accion) {
-		textArea.append("\n" + hora + " " + accion);
+	public void reproducir(Reproductor rep) {
+		rep.play();
 	}
 
-	public static void main(String[] args) {
-		GUI gui = new GUI();
-		gui.setVisible(true);
-		
-	}
 }
